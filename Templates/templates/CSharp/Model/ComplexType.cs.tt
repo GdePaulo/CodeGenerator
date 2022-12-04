@@ -59,7 +59,7 @@ namespace <#=@namespace#>
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Text.Json.Serialization;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// The type <#=complexTypeName#>.
@@ -105,7 +105,8 @@ if (attributeStringBuilder.Length > 0) {
                 ? property.Name.Substring(property.Name.IndexOf('.') + 1).ToCheckedCase()
                 : property.Name.ToCheckedCase().GetSanitizedPropertyName(property);
 
-            var attributeDefinition = string.Format("[JsonPropertyName(\"{0}\")]", property.Name);
+            var attributeDefinition = string.Format("[JsonProperty(PropertyName = \"{0}\", NullValueHandling = NullValueHandling.Ignore, Required = Required.Default)]", property.Name);
+            
 
             if (property.IsDeprecated)
             {
