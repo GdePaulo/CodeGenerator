@@ -90,6 +90,7 @@ if (attributeStringBuilder.Length > 0) {
         ///<summary>
         /// The <#=entityName#> constructor
         ///</summary>
+        [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
         public <#=cstorTypeDeclaration#>()
         {
             this.ODataType = "<#=entity.FullName#>";

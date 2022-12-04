@@ -64,6 +64,7 @@ namespace <#=@namespace#>
     /// <summary>
     /// The type <#=complexTypeName#>.
     /// </summary>
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 <#
 if (attributeStringBuilder.Length > 0) {
 #>
