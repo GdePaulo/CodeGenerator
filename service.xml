@@ -24,9 +24,21 @@
         <Property Name="updatedBy" Type="Edm.String"/>
         <Property Name="createdBy" Type="Edm.String" />
         <Property Name="objectType" Type="Edm.String" />
-        <Property Name="whenCreated" Type="Edm.DateTime" />
-        <Property Name="whenUpdated" Type="Edm.DateTime" />
+        <Property Name="whenCreated" Type="Edm.DateTimeOffset" />
+        <Property Name="whenUpdated" Type="Edm.DateTimeOffset" />
+        <Property Name="woooUpdated" Type="Edm.DaFake" />
         <Property Name="sysModcount" Type="Edm.Int64" />
+      </EntityType>
+      <ComplexType Name="referenceLink">
+        <Property Name="link" Type="Edm.String" />
+        <Property Name="value" Type="Edm.String" />
+      </ComplexType>
+      <EntityType Name="building" BaseType="graph.entity">
+        <Property Name="contact" Type="graph.referenceLink" />
+        <Property Name="floors" Type="Edm.Int64" />
+        <Property Name="location" Type="graph.referenceLink" />
+        <Property Name="name" Type="Edm.String" />
+        <Property Name="notes" Type="Edm.String" />
       </EntityType>
       <ComplexType Name="appIdentity">
         <Property Name="appId" Type="Edm.String" />
