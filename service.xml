@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
   <edmx:DataServices>
-    <Schema Namespace="microsoft.graph" Alias="graph" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <Schema Namespace="serviceNow.graph" Alias="graph" xmlns="http://docs.oasis-open.org/odata/ns/edm">
       <EnumType Name="appliedConditionalAccessPolicyResult">
         <Member Name="success" Value="0" />
         <Member Name="failure" Value="1" />
@@ -21,12 +21,19 @@
           <PropertyRef Name="id" />
         </Key>
         <Property Name="id" Type="Edm.String" Nullable="false" />
+        <Property Name="updatedBy" Type="Edm.String"/>
+        <Property Name="createdBy" Type="Edm.String" />
+        <Property Name="objectType" Type="Edm.String" />
+        <Property Name="whenCreated" Type="Edm.DateTime" />
+        <Property Name="whenUpdated" Type="Edm.DateTime" />
+        <Property Name="sysModcount" Type="Edm.Int64" />
       </EntityType>
       <ComplexType Name="appIdentity">
         <Property Name="appId" Type="Edm.String" />
         <Property Name="displayName" Type="Edm.String" />
         <Property Name="servicePrincipalId" Type="Edm.String" />
         <Property Name="servicePrincipalName" Type="Edm.String" />
+        <Property Name="testBoolean" Type="Edm.Boolean" />
       </ComplexType>
       <ComplexType Name="appliedConditionalAccessPolicy">
         <Property Name="displayName" Type="Edm.String" />
