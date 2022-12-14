@@ -1,6 +1,47 @@
-[vipr-source-repo]: https://github.com/microsoft/vipr
+# Service Now Code Generator
+##	Setup & usage instructions
+*	Run `git clone –recursive https://github.com/GdePaulo/CodeGenerator.git` (fork of MSGraph-SDK-Code-Generator)
+*	Open TypeWriter.sln
+*	Build solution
+*	Navigate to the build folder
+*	Run
+`.\typewriter.exe -v Info -m "{PATH TO GENERATOR}\CodeGenerator\service.xml" -o services -l CSharp -g Files`
 
-[![Build status](https://o365exchange.visualstudio.com/O365%20Sandbox/_apis/build/status/Microsoft%20Graph/msgraph-package-typewriter)](https://o365exchange.visualstudio.com/O365%20Sandbox/_build/latest?definitionId=1728)
+## To modify templates:
+*	Navigate to Templates/templates/CSharp 
+*	Modify appropriate fields and lines
+*	`Base/SharedCSharp.template.tt` is shared by all C# templates
+* `Model/EntityType.cs.tt` is among the most important
+
+## To add documentation:
+* Download appropriate documentation
+*	Run
+`.\typewriter.exe -v Info -m "{PATH TO GENERATOR}\CodeGenerator\service.xml" -o services -l CSharp -d {PATH TO DOCUMENTATION} -g Full`
+##	Explanation
+*	The project uses the Typewriter.exe program
+*	Consists of VIPR, which provides an interface to convert OData to client library entities (ODCM Objects)
+*	Uses Microsoft T4 templates for code generation
+*	It converts an EDMX file which contains the database metadata (definition: an XML file that defines an Entity Data Model (EDM), describes the target database schema, and defines the mapping between the EDM and the database.) to a client library using the T4 Templates.
+##	Future steps
+*	For all REST API requests, set the X-UserToken and use basic authentication using ID and password
+*	Get all ServiceNow table API tables using	`https://dev122065.service-now.com/api/now/doc/table/schema`
+*	For each table, obtain metadata using 
+`https://dev122065.service-now.com/api/now/ui/meta/{tablename}`
+*	Convert this data to the appropriate EDMX format
+    * Could be relatively easily done with a Python script
+    * As an example of the required EDMX format, I stripped down the default Graph API metadata file to the bare minimum and added some test ServiceNow classes. This can be found in the services.xml file.
+    * DateTimeOffset needs to be used for DateTime objects instead of DateTime, as the DateTime type is not defined within the VIPR edm type definitions
+*	Modify the template files appropriately. I already:
+    * Converted some files to use NewtonSoft
+    *	Added the appropriate attribute properties (e.g. NullValueHandling)
+    * Made serialization OptIn
+    * Some todos:
+        * Change JSON variable names to use desired format (i.e. snake case) 
+        * Make sure types are appropriately designated as nullable
+        * Make sure every model inherits from the appropriate base class (i.e. all entities inherit from Entity)
+        * Remove certain default behaviors, such as the adding of the AdditionalData dictionary property
+
+[vipr-source-repo]: https://github.com/microsoft/vipr
 
 # Microsoft Graph SDK Code Generator
 
